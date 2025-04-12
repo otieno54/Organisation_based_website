@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .dashboard-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+            flex: 1;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        
+        /* Hamburger button styles */
+        .hamburger {
+            font-size: 30px;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: none; /* Hide hamburger by default */
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-250px); /* Hide sidebar off-screen */
+            }
+            .hamburger {
+                display: block; /* Show hamburger on mobile */
+            }
+            .content {
+                margin-left: 0; /* Remove margin when sidebar is hidden */
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px; /* Smaller font size for mobile */
+            }
+            .dashboard-stats {
+                flex-direction: column; /* Stack stats vertically on mobile */
+                gap: 10px; /* Add gap between stats */
+            }
+            .stat {
+                padding: 15px; /* Adjust padding for stats */
+                font-size: 14px; /* Smaller font size for stats */
+            }
+        }
+    </style>
+    <script>
+        function isAdmin() {
+            // Simulate an admin check; replace this with real authentication logic.
+            return true; // Change to false to simulate non-admin access.
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const currentTransform = sidebar.style.transform;
+            if (currentTransform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-250px)'; // Hide sidebar
+            } else {
+                sidebar.style.transform = 'translateX(0px)'; // Show sidebar
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!isAdmin()) {
+                alert("You do not have permission to access this page.");
+                window.location.href = "login.html"; // Redirect to login page.
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Hamburger button -->
+    <div class="hamburger" onclick="toggleSidebar()">
+        &#9776;
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="admin.html">Dashboard</a>
+        <div>
+            <a href="programs.html">Add Program</a>
+            <a href="deletprogram.html">Delete Program</a>
+        </div>
+        <div>
+            <a class="dropdown-item" href="gallery.html">Gallery</a>
+            <a class="dropdown-item" href="addphotos.html">Add Photo</a>
+            <a class="dropdown-item" href="deletephoto.html">Delete Photos</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1>Welcome to the Admin Dashboard</h1>
+            <div class="dashboard-stats">
+                <div class="stat">
+                    <h3>Programs</h3>
+                    <p>10</p> <!-- Replace with dynamic data -->
+                </div>
+                <div class="stat">
+                    <h3>Gallery Photos</h3>
+                    <p>25</p> <!-- Replace with dynamic data -->
+                </div>
+                <div class="stat">
+                    <h3>Users</h3>
+                    <p>5</p> <!-- Replace with dynamic data -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
